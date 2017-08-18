@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/dash"
+            android:title="Dashboard" />
+        <item
+            android:id="@+id/stats"
+            android:title="Statistics" />
+        <item
+            android:id="@+id/cont"
+            android:title="Controls" />
+        <item
+            android:id="@+id/instr"
+            android:title="Instructions" />
+    </group>
+
+</menu>
