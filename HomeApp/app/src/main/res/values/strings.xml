@@ -6,8 +6,8 @@
 
     <string name="action_settings">Settings</string>
 
-    <string name="click">Publish</string>
-
+    <string name="clickOn">ON</string>
+    <string name="clickOff">OFF</string>
 
     <string name="temp_title">AREA TEMPERATURE</string>
     <string name="humid_title">SOIL HUMIDITY</string>

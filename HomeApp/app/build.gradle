@@ -24,13 +24,12 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    // Dependencies for PahoMQTT
-    compile('org.eclipse.paho:org.eclipse.paho.android.service:1.1.1') {
-        exclude module: 'support-v4'
-    }
-    compile 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.1.0'
+    // Dependencies for Firbase
+    compile 'com.google.firebase:firebase-database:9.6.1'
+
     // Dependencies for Graph
     compile files('libs/GraphView-4.2.1.jar')
+
     // Dependencies for Gauge
     compile 'com.github.anastr:speedviewlib:1.1.5'
 
@@ -40,3 +39,4 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
 }
+    apply plugin: 'com.google.gms.google-services'

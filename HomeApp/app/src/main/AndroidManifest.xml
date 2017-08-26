@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.monitorapp.prateekjha.home" >
 
-    // Permissions for PahoMQTT Permissions
+    // Permissions for Firbase Services
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -26,8 +26,6 @@
             </intent-filter>
         </activity>
 
-        // PahoMQTT Service
-        <service android:name="org.eclipse.paho.android.service.MqttService" />
     </application>
 
 </manifest>

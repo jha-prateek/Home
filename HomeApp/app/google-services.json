@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "863708305465",
+    "firebase_url": "https://home-e94b8.firebaseio.com",
+    "project_id": "home-e94b8",
+    "storage_bucket": "home-e94b8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:863708305465:android:7649b14f5002cab7",
+        "android_client_info": {
+          "package_name": "com.monitorapp.prateekjha.irrigate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "863708305465-73c1m7mam87mdf2t0fno6o1mh84u2rbn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpP6Vi5_XtNQ1drJb-GOW3L4N8u1h___s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
