@@ -6,10 +6,10 @@ import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 
 config = {
-  "apiKey": "AIzaSyC4fzD7GKmFvB1cFJ69niPTi_5x-QtOJXM",
-  "authDomain": "home-e94b8.firebaseapp.com",
-  "databaseURL": "https://home-e94b8.firebaseio.com",
-  "storageBucket": "home-e94b8.appspot.com"
+  "apiKey": "****",
+  "authDomain": "****",
+  "databaseURL": "****",
+  "storageBucket": "****"
 }
 
 firebase = pyrebase.initialize_app(config)
