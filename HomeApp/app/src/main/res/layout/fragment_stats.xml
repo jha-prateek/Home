@@ -1,16 +1,57 @@
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.monitorapp.prateekjha.home.ControlFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.monitorapp.prateekjha.home.StatsFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:showDividers="middle"
+        android:divider="@drawable/empty_tall_divider"
+        android:weightSum="1">
 
         <!-- TODO: Update blank fragment layout -->
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="369dp"
+            android:layout_height="43dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="monospace"
+            android:text="Last Consumption"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.017" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="369dp"
+            android:layout_height="73dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="monospace"
+            android:text="Tommorow's Consumption"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.017"
+            android:layout_weight="0.21" />
+
         <TextView
             android:id="@+id/temp"
             android:layout_width="wrap_content"
@@ -18,46 +59,13 @@
             android:layout_gravity="center"
             android:layout_marginTop="1dp"
             android:text="@string/temp_title"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textSize="30sp" />
 
         <com.jjoe64.graphview.GraphView
             android:layout_width="match_parent"
             android:layout_height="200dip"
             android:id="@+id/temp_graph"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            />
-
-        <TextView
-            android:id="@+id/humid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="25dp"
-            android:text="@string/humid_title"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
-
-        <com.jjoe64.graphview.GraphView
-            android:layout_width="match_parent"
-            android:layout_height="200dip"
-            android:id="@+id/humid_graph"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            />
-
-        <TextView
-            android:id="@+id/rain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="25dp"
-            android:text="@string/rain_title"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
-
-        <com.jjoe64.graphview.GraphView
-            android:layout_width="match_parent"
-            android:layout_height="200dip"
-            android:id="@+id/rain_graph"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             />

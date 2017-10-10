@@ -7,24 +7,37 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.LinkedList;
-import java.util.Random;
 
 
 public class StatsFragment extends Fragment {
 
+    private DatabaseReference root = FirebaseDatabase.getInstance().getReference();
+    private DatabaseReference data = root.child("Switch_Duration");
+    private DatabaseReference future = root.child("Tommorow's Prediction");
+
+    private TextView tomo;
+    private TextView disp;
+    private double unitPowerRate = (0.015)/3600000; // LED_Power x Rate (5)
+    private LinkedList<Double> power = new LinkedList<>();
+
+
     private final Handler hand = new Handler();
-    private Runnable timer1;
-    private Runnable timer2;
-    private GraphView tgraph;
-    private GraphView hgraph;
-    private LineGraphSeries<DataPoint> series1;
-    private LineGraphSeries<DataPoint> series2;
-    private LinkedList<Double> Y = new LinkedList<>();
+    private Runnable timer;
+    private GraphView pgraph;
+    private LineGraphSeries<DataPoint> series;
+
 
     public StatsFragment() {
         // Required empty public constructor
@@ -44,92 +57,116 @@ public class StatsFragment extends Fragment {
     public void onStart(){
         super.onStart();
 
-        for(int i=0; i<10; i++){
-            Y.add(getRandom());
-        }
+        power.add(0.0);
 
-        View contents = getView();
+        View view = getView();
 
-        tgraph = (GraphView) contents.findViewById(R.id.temp_graph);
-        series1 = new LineGraphSeries<>();
-        tgraph.addSeries(series1);
-        tgraph.getViewport().setYAxisBoundsManual(true);
-        tgraph.getViewport().setMinY(0);
-        tgraph.getViewport().setMaxY(100);
+        disp = (TextView)view.findViewById(R.id.textView3);
+        tomo = (TextView)view.findViewById(R.id.textView4);
 
-        hgraph = (GraphView) contents.findViewById(R.id.humid_graph);
-        series2 = new LineGraphSeries<>(generateData());
-        hgraph.addSeries(series2);
-        hgraph.getViewport().setYAxisBoundsManual(true);
-        hgraph.getViewport().setMinY(0);
-        hgraph.getViewport().setMaxY(100);
-        hgraph.getViewport().setXAxisBoundsManual(true);
-        hgraph.getViewport().setMinX(0);
-        hgraph.getViewport().setMaxX(10);
-        hgraph.getViewport().setScrollable(true);
+        data.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds: dataSnapshot.getChildren()){
 
+                    long day = Long.parseLong(ds.child("Day").getValue().toString());
+                    long duration = 0;
+                    for(DataSnapshot Ids: dataSnapshot.getChildren()){
 
-        GraphView rgraph = (GraphView) contents.findViewById(R.id.rain_graph);
-        LineGraphSeries<DataPoint> rseries = new LineGraphSeries<>(new DataPoint[] {
-                new DataPoint(0, 90),
-                new DataPoint(1, 75),
-                new DataPoint(2, 35),
-                new DataPoint(3, 100),
-                new DataPoint(4, 85)
+                        if(Long.parseLong(Ids.child("Day").getValue().toString())==day){
+                            duration += Long.parseLong(Ids.child("Duration").getValue().toString());
+                        }
+                    }
+
+                    if(power.getLast() != duration*unitPowerRate*100){
+                        power.addLast(duration*unitPowerRate*100);
+                    }
+
+                }
+
+                disp.setText("Last Consumption: " + Double.toString(power.getLast()).substring(0,7) + "kW");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
         });
-        rgraph.addSeries(rseries);
+
+        future.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                tomo.setText("Tomorrow's Consumption \n" + dataSnapshot.getValue().toString().substring(0,7) + "kW");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        pgraph = (GraphView) view.findViewById(R.id.temp_graph);
+        series = new LineGraphSeries<>(generateData());
+        pgraph.addSeries(series);
+        pgraph.getViewport().setYAxisBoundsManual(true);
+        pgraph.getViewport().setMinY(0);
+        pgraph.getViewport().setMaxY(700);
+        pgraph.getViewport().setXAxisBoundsManual(true);
+        pgraph.getViewport().setMinX(1);
+        pgraph.getViewport().setMaxX(10);
+        pgraph.getViewport().setScrollable(true);
     }
 
-    private int load = 0;
     @Override
     public void onResume(){
         super.onResume();
-        timer1 = new Runnable(){
+
+        timer = new Runnable(){
             @Override
             public void run(){
-                load += 2;
-                series1.appendData(new DataPoint(load, getRandom()), true, 40);
-                hand.postDelayed(this,1000);
+                series.resetData(generateData());
+                hand.postDelayed(this,100);
             }
         };
-        hand.postDelayed(timer1,1000);
+        hand.postDelayed(timer,100);
 
-        timer2 = new Runnable(){
-            @Override
-            public void run(){
-                series2.resetData(generateData());
-                hand.postDelayed(this,5000);
-            }
-        };
-        hand.postDelayed(timer2,5000);
-    }
-
-    private double getRandom() {
-        Random rand = new Random();
-        return rand.nextDouble()*100;
     }
 
     private DataPoint[] generateData() {
-        Random rand = new Random();
+
+        LinkedList<Integer> pk = new LinkedList<>();
+        for(int s=0; s<10; s++){
+            pk.add(0);
+        }
         DataPoint[] values = new DataPoint[10];
+        if(power.size()>5){
+            double x = 0;
+            int a = 0;
+            for (int i = power.size()-10; i < power.size(); i++) {
+                double y = power.get(i);
+                DataPoint v = new DataPoint(x++, y);
+                values[a++] = v;
+            }
+        }else {
         for (int i=0; i<10; i++) {
             double x = i;
-            double y = Y.get(i);
+            double y = pk.get(i);
             DataPoint v = new DataPoint(x, y);
             values[i] = v;
         }
-        Y.remove();
-        Y.add(rand.nextDouble()*100);
+    }
         return values;
     }
 
+
     @Override
     public void onPause() {
-        series2.resetData(new DataPoint[]{
+
+        series.resetData(new DataPoint[]{
                 new DataPoint(0, 0),
         });
-        hand.removeCallbacks(timer1);
-        hand.removeCallbacks(timer2);
+        hand.removeCallbacks(timer);
+
         super.onPause();
     }
 

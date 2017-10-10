@@ -4,6 +4,8 @@ from pprint import pprint
 from operator import itemgetter
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import PolynomialFeatures
+import requests
 
 config = {
   "apiKey": "AIzaSyC4fzD7GKmFvB1cFJ69niPTi_5x-QtOJXM",
@@ -11,6 +13,11 @@ config = {
   "databaseURL": "https://home-e94b8.firebaseio.com",
   "storageBucket": "home-e94b8.appspot.com"
 }
+
+r = requests.get('http://api.openweathermap.org/data/2.5/weather?q=Chennai&APPID=ffb1054510c074df76b0d02f3dd0fde4')
+th = r.json()
+cur_t = th['main']['temp'] - 273
+cur_h = th['main']['humidity']
 
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
@@ -20,9 +27,9 @@ sw = db.child('Switch_Duration').get().val().values()
 sample = sorted(sw, key=itemgetter('Day'))
 pprint(sample)
 
-led_power_Kw = 0.015
-rate_Kw = 5
-unit = float(led_power_Kw) / float(3600000) * float(rate_Kw)
+led_power_Kw = 0.015 # Power rating of LED (15 Watt)
+# rate_Kw = 5 # Rs per unit Energy
+unit = float(led_power_Kw) / float(3600000)# * float(rate_Kw)
 
 X_sample = []
 Y_sample = []
@@ -69,11 +76,30 @@ print lm.coef_
 print "Intercept: ",
 print lm.intercept_
 print "Value: ",
-X_test = [17415,28.0,63.5]
+X_test = [int(round(time.time()*1000 / 86400000))+1,24.0,31.0]
 pred = lm.predict(X_test)
-print pred[0][0]
+print pred[0][0]*100
 
-db.child("Tommorow's Prediction").set(pred[0][0])
+
+# print
+# print "Performing Polynomial Regression..."
+# poly = PolynomialFeatures(degree=1)
+# X = poly.fit_transform(X_sample)
+# print X
+# polyReg = LinearRegression()
+# polyReg.fit(X,Y_sample)
+# print "Coeifficient: ",
+# print polyReg.coef_
+# print "Intercept: ",
+# print polyReg.intercept_
+# X_test = [17447,24.0,31.0]
+# X_ = poly.fit_transform(X_test)
+# print X_
+# print "Value: ",
+# print polyReg.predict(X_)[0][0]*100
+
+
+db.child("Tommorow's Prediction").set(pred[0][0]*100)
 
 """
 plt.scatter(X_sample,Y_sample,color='blue')

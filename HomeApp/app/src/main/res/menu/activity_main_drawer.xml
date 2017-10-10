@@ -9,11 +9,8 @@
             android:id="@+id/stats"
             android:title="Statistics" />
         <item
-            android:id="@+id/cont"
-            android:title="Controls" />
-        <item
-            android:id="@+id/instr"
-            android:title="Instructions" />
+            android:id="@+id/abt"
+            android:title="About" />
     </group>
 
 </menu>

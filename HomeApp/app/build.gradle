@@ -25,18 +25,18 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     // Dependencies for Firbase
-    compile 'com.google.firebase:firebase-database:9.6.1'
 
     // Dependencies for Graph
     compile files('libs/GraphView-4.2.1.jar')
 
     // Dependencies for Gauge
-    compile 'com.github.anastr:speedviewlib:1.1.5'
 
+    compile 'com.google.firebase:firebase-database:9.6.1'
+    compile 'com.github.anastr:speedviewlib:1.1.5'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
 }
-    apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.gms.google-services'

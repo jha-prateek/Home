@@ -9,11 +9,14 @@
     <string name="clickOn">ON</string>
     <string name="clickOff">OFF</string>
 
-    <string name="temp_title">AREA TEMPERATURE</string>
-    <string name="humid_title">SOIL HUMIDITY</string>
-    <string name="rain_title">RAIN FORECAST</string>
+    <string name="temp_title">Energy Plot</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="about">Home is a system built for keeping track
+                        of your Energy Uses.\n\n
+                        The system also predicts your future consumption
+                        based on several features using Machine Learning
+                        Algorithm.\n\n
+    </string>
 
 </resources>

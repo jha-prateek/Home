@@ -88,11 +88,8 @@ public class MainActivity extends AppCompatActivity
             case R.id.stats:
                 fragment = new StatsFragment();
                 break;
-            case R.id.cont:
-                fragment = new ControlFragment();
-                break;
-            case R.id.instr:
-                Toast.makeText(this, "Instructions selected", Toast.LENGTH_SHORT).show();
+            case R.id.abt:
+                fragment = new AboutFragment();
                 break;
         }
 
