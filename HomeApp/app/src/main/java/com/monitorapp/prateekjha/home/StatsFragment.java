@@ -110,7 +110,7 @@ public class StatsFragment extends Fragment {
         pgraph.addSeries(series);
         pgraph.getViewport().setYAxisBoundsManual(true);
         pgraph.getViewport().setMinY(0);
-        pgraph.getViewport().setMaxY(700);
+        pgraph.getViewport().setMaxY(200);
         pgraph.getViewport().setXAxisBoundsManual(true);
         pgraph.getViewport().setMinX(1);
         pgraph.getViewport().setMaxX(10);
