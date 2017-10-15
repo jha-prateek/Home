@@ -8,10 +8,10 @@ from sklearn.preprocessing import PolynomialFeatures
 import requests
 
 config = {
-  "apiKey": "AIzaSyC4fzD7GKmFvB1cFJ69niPTi_5x-QtOJXM",
-  "authDomain": "home-e94b8.firebaseapp.com",
-  "databaseURL": "https://home-e94b8.firebaseio.com",
-  "storageBucket": "home-e94b8.appspot.com"
+  "apiKey": "****",
+  "authDomain": "****",
+  "databaseURL": "****",
+  "storageBucket": "****"
 }
 
 r = requests.get('http://api.openweathermap.org/data/2.5/weather?q=Chennai&APPID=ffb1054510c074df76b0d02f3dd0fde4')

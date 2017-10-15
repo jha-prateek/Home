@@ -10,10 +10,10 @@ byte packetBuffer[ NTP_PACKET_SIZE]; //buffer to hold incoming and outgoing pack
 
 WiFiUDP udp;
 
-#define FIREBASE_HOST "home-e94b8.firebaseio.com"
-#define FIREBASE_AUTH "q3TQjLrXz3j800fhCIzFhxUGfAU7bwBj6uJR0J66"
-#define WIFI_SSID "4074"
-#define WIFI_PASSWORD "estancia4074"
+#define FIREBASE_HOST "****"
+#define FIREBASE_AUTH "****"
+#define WIFI_SSID "****"
+#define WIFI_PASSWORD "****"
 
 unsigned long sendNTPpacket(IPAddress& address);
 
