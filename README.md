@@ -21,5 +21,4 @@
 
 #### SCREENSHOT
 
-![alt text](https://github.com/jha-prateek/Home/blob/master/Snapshots/Screenshot_20171010-231050.png)
-![alt text](https://github.com/jha-prateek/Home/blob/master/Snapshots/Screenshot_20171010-231113.png)
+![alt text](https://github.com/jha-prateek/Home/blob/master/Snapshots/Screenshot_20171010-231050.png)	![alt text](https://github.com/jha-prateek/Home/blob/master/Snapshots/Screenshot_20171010-231113.png)
